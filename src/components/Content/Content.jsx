@@ -6,6 +6,7 @@ import Sort from './Sort/Sort';
 const Content = () => {
    return (<div className="content">
       <div className="container">
+         {/* <NotFound /> */}
          <div className="content__top">
             <Categories />
             <Sort />

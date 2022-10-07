@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import './scss/app.scss'
 import Header from './components/Header/Header'
-import Content from './components/Content/Content';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import Cart from './pages/Cart';
+
 
 const App = React.memo(() => {
   return (
     <div>
       <div className="wrapper">
         <Header />
-        <Content />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='*' element={<NotFound />} />
+          <Route path='cart' element={<Cart />} />
+        </Routes>
       </div>
     </div>
   );
