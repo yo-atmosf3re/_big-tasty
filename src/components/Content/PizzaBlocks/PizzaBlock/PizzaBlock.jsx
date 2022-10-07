@@ -21,27 +21,18 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
       <div className="pizza-block__selector">
          <ul>
             {
-               types.map((t, i) => (
-                  <li onClick={() => onClickTypes(i)} className={typeIndex === i ? 'active' : ''}>{typeNames[t]}</li>
+               types.map((t, i, key) => (
+                  <li key={i} onClick={() => onClickTypes(i)} className={typeIndex === i ? 'active' : ''}>{typeNames[t]}</li>
                ))
             }
          </ul>
-         {/* <ul>
-            <li className="active">тонкое</li>
-            <li>традиционное</li>
-         </ul> */}
          <ul>
             {
-               sizes.map((s, i) => (
-                  <li onClick={() => onClickSizes(i)} className={sizeIndex === i ? 'active' : ''}>{s} см.</li>
+               sizes.map((s, i, key) => (
+                  <li key={i} onClick={() => onClickSizes(i)} className={sizeIndex === i ? 'active' : ''}>{s} см.</li>
                ))
             }
          </ul>
-         {/* <ul>
-            <li className="active">26 см.</li >
-            <li>30 см.</li>
-            <li>40 см.</li>
-         </ul> */}
       </div>
       <div className="pizza-block__bottom" onClick={pizzaCountClickHandler}>
          <div className="pizza-block__price">от {price} ₽</div>
