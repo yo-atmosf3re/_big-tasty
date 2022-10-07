@@ -10,15 +10,13 @@ import Cart from './pages/Cart';
 
 const App = React.memo(() => {
   return (
-    <div>
-      <div className="wrapper">
-        <Header />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='*' element={<NotFound />} />
-          <Route path='cart' element={<Cart />} />
-        </Routes>
-      </div>
+    <div className="wrapper">
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='*' element={<NotFound />} />
+        <Route path='cart' element={<Cart />} />
+      </Routes>
     </div>
   );
 })

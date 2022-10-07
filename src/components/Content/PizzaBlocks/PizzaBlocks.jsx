@@ -11,8 +11,8 @@ const PizzaBlocks = () => {
             setItems(json)
             setIsLoading(false)
          })
-
-   }, [items])
+      window.scrollTo(0, 0)
+   }, [])
    const [isLoading, setIsLoading] = useState(true)
    return (<div>
       <h2 className="content__title">Все пиццы</h2>

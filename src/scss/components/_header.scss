@@ -1,18 +1,24 @@
-@import '../_variables.scss';
+@import "../_variables.scss";
 
 .header {
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
-
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 690px) {
+      flex-direction: column;
+      .header__cart {
+        margin-top: 30px;
+      }
+    }
   }
 
   &__logo {
     display: flex;
-
+    text-align: left;
+    padding: 0 0 0 10px;
     img {
       margin-right: 15px;
     }
