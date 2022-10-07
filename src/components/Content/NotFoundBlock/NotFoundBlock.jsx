@@ -1,6 +1,5 @@
 import React from 'react'
 import s from './NotFoundBlock.module.scss'
-console.log(s)
 
 const NotFoundBlock = () => {
    return (

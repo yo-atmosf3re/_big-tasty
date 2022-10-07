@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 
-const Sort = () => {
-   const [activeIndex, setActiveIndex] = useState(0)
+const Sort = ({ value, onClickSortType }) => {
    const [activePopup, setActivePopup] = useState(false)
-   const sortTitle = ['популярности', 'цене', 'алфавиту']
+   const sortTitle = [
+      { name: 'популярности', sortProperty: 'rating' },
+      { name: 'цене', sortProperty: 'price' },
+      { name: 'алфавиту', sortProperty: 'title' }]
    const onClickPopupActive = (index) => {
-      setActiveIndex(index)
+      onClickSortType(index)
       setActivePopup(!activePopup)
    }
 
@@ -24,14 +26,19 @@ const Sort = () => {
             />
          </svg>
          <b >Сортировка по:</b>
-         <span onClick={() => setActivePopup(!activePopup)}>{sortTitle[activeIndex]}</span>
+         <span onClick={() => setActivePopup(!activePopup)}>{value.name}</span>
       </div>
       {
          activePopup && (<div className="sort__popup">
             <ul>
                {
                   sortTitle.map((s, i) => (
-                     <li onClick={() => onClickPopupActive(i)} key={i} className={activeIndex === i ? 'active' : ''}>{s}</li>
+                     <li
+                        onClick={() => onClickPopupActive(s)}
+                        key={i}
+                        className={value.sortProperty === s.sortProperty ? 'active' : ''}>
+                        {s.name}
+                     </li>
                   ))
                }
             </ul>

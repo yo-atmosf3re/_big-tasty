@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
+   // debugger
    const [pizzaCount, setPizzaCount] = useState(0)
    const [typeIndex, setTypeIndex] = useState(0);
    const [sizeIndex, setSizeIndex] = useState(0);
@@ -20,18 +21,24 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
          <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
          <h4 className="pizza-block__title">{title}</h4>
          <div className="pizza-block__selector">
+
             <ul>
                {
-                  types.map((t, i, key) => (
-                     <li key={i} onClick={() => onClickTypes(i)} className={typeIndex === i ? 'active' : ''}>{typeNames[t]}</li>
-                  ))
+                  types.map((t, i) => {
+                     (
+
+                        <li key={i} onClick={() => onClickTypes(i)} className={typeIndex === i ? 'active' : ''}>{typeNames[t]}</li>
+                     )
+                  })
                }
             </ul>
             <ul>
                {
-                  sizes.map((s, i, key) => (
-                     <li key={i} onClick={() => onClickSizes(i)} className={sizeIndex === i ? 'active' : ''}>{s} см.</li>
-                  ))
+                  // sizes.map((s, i) => {
+                  //    (
+                  //       <li key={i} onClick={() => onClickSizes(i)} className={sizeIndex === i ? 'active' : ''}>{s} см.</li>
+                  //    )
+                  // })
                }
             </ul>
          </div>
