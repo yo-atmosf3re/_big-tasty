@@ -8,8 +8,8 @@ const Pagination = ({ onChangePagination }) => {
          className={styles.root}
          breakLabel="..."
          nextLabel=">"
-         onPageChange={event => console.log(event)}
-         pageRangeDisplayed={8}
+         onPageChange={(e) => onChangePagination(e.selected + 1)}
+         pageRangeDisplayed={4}
          pageCount={3}
          previousLabel="<"
          renderOnZeroPageCount={null}

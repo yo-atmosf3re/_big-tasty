@@ -1,6 +1,12 @@
 @import "./../../../scss/variables";
 
 .root {
+   @media (max-width: 810px) {
+      text-align: center;
+   }
+   @media (max-width: 690px) {
+      text-align: center;
+   }
    li {
       display: inline-block;
       a {
@@ -8,7 +14,7 @@
          text-align: center;
          padding: 9.6px;
          border: 0.5px solid $orange;
-         border-radius: 30px;
+         border-radius: 32px;
          width: 32px;
          height: 32px;
          line-height: 8px;
@@ -16,9 +22,19 @@
          margin-right: 10px;
          cursor: pointer;
          color: #666;
+         transition: all 0.2s ease-in;
+         @media (max-width: 690px) {
+            border-radius: 45px;
+            width: 45px;
+            height: 45px;
+            line-height: 22px;
+            font-size: 23px;
+         }
          &:hover {
             background-color: $orange;
             color: white;
+            opacity: 0.5;
+            transform: scale(1.2);
          }
       }
    }

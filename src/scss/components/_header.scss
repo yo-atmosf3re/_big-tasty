@@ -3,14 +3,36 @@
 .header {
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
+  @media (max-width: 998px) {
+    .container {
+      width: 97%;
+    }
+  }
+  @media (max-width: 810px) {
+    padding: 15px 0;
+  }
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 1040px) {
+      .button--cart {
+        padding: 10px 15px;
+      }
+    }
+    @media (max-width: 945px) {
+      flex-direction: column;
+      .container {
+      }
+    }
+    @media (max-width: 998px) {
+      .button--cart {
+      }
+    }
     @media (max-width: 690px) {
       flex-direction: column;
       .header__cart {
-        margin-top: 30px;
+        margin-top: 10px;
       }
     }
   }

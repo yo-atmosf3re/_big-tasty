@@ -31,7 +31,6 @@ const Home = ({ searchValue }) => {
             setItems(json)
             setIsLoading(false)
          })
-      window.scrollTo(0, 0)
    }, [categoryId, sortType, searchValue, currentPage])
 
    const pizzas = items.map((obj) => (<PizzaBlock key={obj.id} {...obj} />));

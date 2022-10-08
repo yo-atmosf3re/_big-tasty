@@ -1,5 +1,8 @@
 .root {
    position: relative;
+   @media (max-width: 945px) {
+      margin: 25px 0;
+   }
    .input {
       border: 1px solid rgba(0, 0, 0, 0.1);
       padding: 8px 15px;
@@ -7,14 +10,11 @@
       width: 300px;
       border-radius: 12px;
       font-size: 18px;
-      transition: all 0.15s ease-in-out;
       &:hover {
          border: 1px solid rgba(0, 0, 0, 0.2);
-         width: 305px;
       }
       &:focus {
          border: 1px solid rgba(0, 0, 0, 0.3);
-         width: 315px;
       }
    }
 
