@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import './scss/app.scss'
@@ -9,11 +9,14 @@ import Cart from './pages/Cart';
 
 
 const App = React.memo(() => {
+  const [searchValue, setSearchValue] = useState('');
+
+
   return (
     <div className="wrapper">
-      <Header />
+      <Header searchValue={searchValue} setSearchValue={setSearchValue} />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home searchValue={searchValue} />} />
         <Route path='*' element={<NotFound />} />
         <Route path='cart' element={<Cart />} />
       </Routes>
