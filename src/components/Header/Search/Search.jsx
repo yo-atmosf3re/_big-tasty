@@ -6,7 +6,6 @@ const Search = React.memo(() => {
    const searchValueOnChangeHandler = (e) => setSearchValue(e)
    const clearSearchInputHandler = () => setSearchValue('')
    const { searchValue, setSearchValue } = useContext(SearchContext);
-   console.log('Search rerender')
    return (
       <div className={styles.root}>
          <svg className={styles.icon} viewBox="0 0 32 32" >

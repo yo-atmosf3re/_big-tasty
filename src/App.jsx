@@ -10,7 +10,6 @@ import Cart from './pages/Cart';
 export const SearchContext = React.createContext('');
 
 const App = React.memo(() => {
-  console.log("App rerender")
   const [searchValue, setSearchValue] = useState('');
 
 
