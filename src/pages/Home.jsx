@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Categories from '../components/Content/Categories/Categories';
 import Sort from '../components/Content/Sort/Sort';
 import PizzaBlock from '../components/Content/PizzaBlock/PizzaBlock';
 import Skeleton from '../components/Content/PizzaBlock/Skeleton';
 import Pagination from '../components/Content/Pagination/Pagination';
+import { SearchContext } from '../App';
 
-const Home = ({ searchValue }) => {
+const Home = React.memo(() => {
+   console.log('Home rerender')
+   const { searchValue } = useContext(SearchContext);
    const [items, setItems] = useState([]);
    const [isLoading, setIsLoading] = useState(true)
    const [categoryId, setCategoryId] = useState(0);
@@ -51,6 +54,6 @@ const Home = ({ searchValue }) => {
          </div>
       </div>
    </div>);
-}
+})
 
 export default Home;
