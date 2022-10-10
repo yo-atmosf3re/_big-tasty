@@ -5,7 +5,7 @@ import './scss/app.scss'
 import Header from './components/Header/Header'
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import Cart from './pages/Cart';
+import Cart from './pages/Cart/Cart.jsx';
 
 export const SearchContext = React.createContext('');
 

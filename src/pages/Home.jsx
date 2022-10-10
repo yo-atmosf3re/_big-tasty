@@ -15,8 +15,8 @@ import axios from 'axios';
 const Home = React.memo(() => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   // const isSearch = useRef(false);
-   // const isMounted = useRef(false);
+   // const isSearch = useRef(false); // ?? это для useEffect, которые отвечают за превязку URL
+   // const isMounted = useRef(false); // ** это для useEffect, которые отвечают за превязку URL
 
    const { categoryId, sort, pageCount } = useSelector((state) => state.filter)
 
