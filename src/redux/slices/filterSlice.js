@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 // todo Начальный стейт, как по классике редакса;
 const initialState = {
    categoryId: 0,
+   pageCount: 1,
    sort: {
       name: 'популярности', sortProperty: 'rating'
    }
@@ -19,11 +20,12 @@ export const filterSlice = createSlice({
       // ** То, что ниже - это сам метод, он принимает сам изначальный стэйт и какой-то экшен. В экшене будет хранится дополнительная информация, то есть, когда метод будет задиспатчен, например - (dispatch(setCategoryId(5))), то в функцию передастся что-то, что попадёт в экшен, но чтобы использовать то, что приходит в метод, нужно использовать это вот так (action.payload) в самом слайсе, потому что значение будет хранится только в payload.
       setCategoryId(state, action) { state.categoryId = action.payload },
       setSort(state, action) { state.sort = action.payload },
+      setPage(state, action) { state.pageCount = action.payload },
    },
 })
 
 // ** Это для того, чтобы из слайса достать методы и экспортировать их. Все методы хранятся в actions. То есть, тут мы достаем методы из слайса, присваеваем их константе и экспортируем
-export const { setCategoryId, setSort } = filterSlice.actions
+export const { setCategoryId, setSort, setPage } = filterSlice.actions
 
 // ** Испорт редьюсера по-умолчанию
 export default filterSlice.reducer

@@ -1,11 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import styles from './Search.module.scss'
 import { SearchContext } from '../../../App';
+import debounce from 'lodash.debounce';
 
 const Search = React.memo(() => {
-   const searchValueOnChangeHandler = (e) => setSearchValue(e)
-   const clearSearchInputHandler = () => setSearchValue('')
-   const { searchValue, setSearchValue } = useContext(SearchContext);
+   const { setSearchValue } = useContext(SearchContext);
+   const [value, setValue] = useState('');
+   // const searchValueOnChangeHandler = (e) => {
+   //    setSearchValue(e)
+   // }
+   const onChangeInput = (e) => {
+      setValue(e.currentTarget.value)
+      updateSearchValue(e.currentTarget.value)
+   }
+   const updateSearchValue = useCallback(
+      debounce((str) => {
+         setSearchValue(str);
+      }, 300),
+      []
+   )
+   const clearSearchInputHandler = () => {
+      setSearchValue('')
+      setValue('')
+      inputRef.current.focus()
+   }
+
+   const inputRef = useRef();
    return (
       <div className={styles.root}>
          <svg className={styles.icon} viewBox="0 0 32 32" >
@@ -14,8 +34,8 @@ const Search = React.memo(() => {
                <path d="M29.71,28.29l-6.5-6.5-.07,0a12,12,0,1,0-1.39,1.39s0,.05,0,.07l6.5,6.5a1,1,0,0,0,1.42,0A1,1,0,0,0,29.71,28.29ZM14,24A10,10,0,1,1,24,14,10,10,0,0,1,14,24Z" />
             </g>
          </svg>
-         <input value={searchValue} onChange={(e) => { searchValueOnChangeHandler(e.currentTarget.value) }} className={styles.input} placeholder='Поиск пиццы...' />
-         {searchValue &&
+         <input ref={inputRef} value={value} onChange={onChangeInput} className={styles.input} placeholder='Поиск пиццы...' />
+         {value &&
             <svg onClick={clearSearchInputHandler} className={styles.clearIcon} height="14px" viewBox="0 0 14 14" width="14px" >
                <title />
                <desc />
