@@ -21,11 +21,16 @@ export const filterSlice = createSlice({
       setCategoryId(state, action) { state.categoryId = action.payload },
       setSort(state, action) { state.sort = action.payload },
       setPage(state, action) { state.pageCount = action.payload },
+      setFilters(state, action) {
+         state.sort = action.payload.sort;
+         state.pageCount = Number(action.payload.currentPage);
+         state.categoryId = Number(action.payload.categoryId);
+      }
    },
 })
 
 // ** Это для того, чтобы из слайса достать методы и экспортировать их. Все методы хранятся в actions. То есть, тут мы достаем методы из слайса, присваеваем их константе и экспортируем
-export const { setCategoryId, setSort, setPage } = filterSlice.actions
+export const { setCategoryId, setSort, setPage, setFilters } = filterSlice.actions;
 
 // ** Испорт редьюсера по-умолчанию
-export default filterSlice.reducer
+export default filterSlice.reducer;
