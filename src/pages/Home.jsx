@@ -15,11 +15,11 @@ import axios from 'axios';
 const Home = React.memo(() => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
+
    // const isSearch = useRef(false); // ?? это для useEffect, которые отвечают за превязку URL
    // const isMounted = useRef(false); // ** это для useEffect, которые отвечают за превязку URL
 
    const { categoryId, sort, pageCount } = useSelector((state) => state.filter)
-
    const { searchValue } = useContext(SearchContext);
    const [items, setItems] = useState([]);
    const [isLoading, setIsLoading] = useState(true)
@@ -31,18 +31,30 @@ const Home = React.memo(() => {
    const setCurrentPage = useCallback((v) => {
       dispatch(setPage(v))
    }, [setPage])
-   const fetchPizzas = () => {
+
+   const fetchPizzas = async () => {
       setIsLoading(true)
       const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
       const sortBy = sort.sortProperty.replace('-', '');
       const categorySelection = categoryId > 0 ? `category=${categoryId}` : '';
       const search = searchValue ? `&search=${searchValue}` : '';
 
-      axios.get(`https://633fd93ae44b83bc73c298e6.mockapi.io/items?page=${pageCount}&limit=4&${categorySelection}&sortBy=${sortBy}&order=${order}${search}`)
-         .then(res => {
-            setItems(res.data)
-            setIsLoading(false)
-         })
+      // await axios.get(`https://633fd93ae44b83bc73c298e6.mockapi.io/items?page=${pageCount}&limit=4&${categorySelection}&sortBy=${sortBy}&order=${order}${search}`)
+      //    .then(res => {
+      //       setItems(res.data)
+      //       setIsLoading(false)
+      //    }).catch(error => setIsLoading(false))
+
+
+      try {
+         const res = await axios.get(`https://633fd93ae44b83bc73c298e6.mockapi.io/items?page=${pageCount}&limit=4&${categorySelection}&sortBy=${sortBy}&order=${order}${search}`)
+         setItems(res.data)
+      } catch (error) {
+         console.log('ERROR AXIOS', error)
+         alert('Ошибка при получении товаров')
+      } finally {
+         setIsLoading(false)
+      }
    }
 
    // ** Если изменили параметры и был первый рендер - требует доработки
