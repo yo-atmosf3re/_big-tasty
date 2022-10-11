@@ -7,22 +7,17 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart/Cart.jsx';
 
-export const SearchContext = React.createContext('');
-
 const App = React.memo(() => {
-  const [searchValue, setSearchValue] = useState('');
 
 
   return (
     <div className="wrapper">
-      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
-        <Header />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='*' element={<NotFound />} />
-          <Route path='cart' element={<Cart />} />
-        </Routes>
-      </SearchContext.Provider>
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='*' element={<NotFound />} />
+        <Route path='cart' element={<Cart />} />
+      </Routes>
     </div>
   );
 })

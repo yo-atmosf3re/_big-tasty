@@ -5,12 +5,11 @@ import Sort from '../components/Content/Sort/Sort';
 import PizzaBlock from '../components/Content/PizzaBlock/PizzaBlock';
 import Skeleton from '../components/Content/PizzaBlock/Skeleton';
 import Pagination from '../components/Content/Pagination/Pagination';
-import { SearchContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setPage, setFilters } from '../redux/slices/filterSlice';
+import { setCategoryId, setPage, setFilters, selectFilter } from '../redux/slices/filterSlice';
 import { useNavigate } from 'react-router-dom';
 import { sortTitle } from '../components/Content/Sort/Sort'
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import { fetchPizzas, selectItemsData } from '../redux/slices/pizzaSlice';
 
 const Home = React.memo(() => {
    const navigate = useNavigate();
@@ -19,9 +18,9 @@ const Home = React.memo(() => {
    // const isSearch = useRef(false); // ?? это для useEffect, которые отвечают за превязку URL
    // const isMounted = useRef(false); // ** это для useEffect, которые отвечают за превязку URL
 
-   const { categoryId, sort, pageCount } = useSelector((state) => state.filter)
-   const { items, status } = useSelector((state) => state.pizza)
-   const { searchValue } = useContext(SearchContext);
+   const { categoryId, sort, pageCount, searchValue } = useSelector(selectFilter)
+   const { items, status } = useSelector(selectItemsData)
+
 
 
    const changeCategoryHandler = useCallback((i) => {
@@ -83,15 +82,9 @@ const Home = React.memo(() => {
    // }, [])
 
    // ** Если был первый рендер, то запрашиваем пиццы - требует доработки
+
    useEffect(() => {
-      // window.scrollTo(0, 0)
-      // if (!isSearch.current) {
-      //    getPizzas();
-      // }
-      // isSearch.current = false;
-      // if (window.location.search) {
       getPizzas();
-      // }
    }, [categoryId, sort.sortProperty, searchValue, pageCount])
 
 
