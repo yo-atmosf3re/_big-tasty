@@ -23,6 +23,22 @@ body {
 .content {
   padding: 40px 0;
 
+  &__error-indo {
+    margin: 60px auto;
+    width: 600px;
+    padding-left: 10px;
+    text-align: center;
+
+    h2 {
+      padding: 20px 0;
+      font-size: 32px;
+    }
+    p {
+      padding: 5px;
+      font-size: 20px;
+    }
+  }
+
   &__title {
     margin: 55px 0;
     font-weight: 700;

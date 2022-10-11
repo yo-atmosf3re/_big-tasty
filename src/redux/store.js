@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import filter from './slices/filterSlice.js'
 import cart from './slices/cartSlice.js'
+import pizza from './slices/pizzaSlice.js'
 
 // ** configureStore - создаёт хранилище, внутри в поле reducer передаём наши созданные слайсы, в которых и будет происходить вся логика по изменению стейта;
 export const store = configureStore({
    reducer: {
       filter,
       cart,
+      pizza,
    },
 })
 
