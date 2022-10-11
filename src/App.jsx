@@ -5,20 +5,23 @@ import './scss/app.scss'
 import Header from './components/Header/Header'
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
+import FullPizza from './pages/FullPizza';
 import Cart from './pages/Cart/Cart.jsx';
+import MainLayout from './pages/MainLayout';
 
 const App = React.memo(() => {
 
 
   return (
-    <div className="wrapper">
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='*' element={<NotFound />} />
+    <Routes>
+      <Route path='/' element={<MainLayout />}>
+        <Route path='' element={<Home />} />
+        <Route path='' element={<NotFound />} />
+        <Route path='product/:id' element={<FullPizza />} />
         <Route path='cart' element={<Cart />} />
-      </Routes>
-    </div>
+      </Route>
+    </Routes>
+
   );
 })
 
