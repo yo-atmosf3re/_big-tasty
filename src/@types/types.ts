@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import { store } from "../redux/store";
 
 // ?? Typing for components
@@ -54,20 +55,23 @@ export type NamesType = "тонкое" | "традиционное"
 
 // ** Typing for redux-toolkit
 // ** store.ts
+// ** Типизация для всего стэйта
 export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch: () => AppDispatch = useDispatch
 // ** cartSlice.ts
 export interface CartSliceState {
    totalPrice: number
-   items: CartItem[]
+   items: CartItemType[]
 }
-export type CartItem = {
+export type CartItemType = {
    id: string
    imageUrl: string
    title: string
    type: string
    size: number
    price: number
-   count?: number
+   count: number
 }
 // ** filterSlice.ts
 export type SortType = SortTitleType
@@ -78,11 +82,12 @@ export interface FilterSliceState {
    sort: SortType
 }
 // ** productSlice.ts
+export enum Status { LOADING = 'loading', SUCCESS = 'success', ERROR = 'error' }
 export interface ProductSliceState {
-   items: ItemType[];
-   status: 'loading' | 'success' | 'error'
+   items: ItemProductType[];
+   status: Status
 }
-export type ItemType = {
+export type ItemProductType = {
    id: string
    title: string
    price: number
@@ -90,4 +95,10 @@ export type ItemType = {
    sizes: Array<number>
    types: Array<number>
 }
-export type FetchProductsArgumentsType = Record<string, string>;
+export type FetchProductsArgumentsType = {
+   order: string,
+   sortBy: string,
+   categorySelection: string,
+   search: string,
+   pageCount: number
+};

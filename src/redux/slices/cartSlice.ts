@@ -1,5 +1,6 @@
+import { calcTotalPrice } from './../../utils/calcTotalPrice';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CartItem, CartSliceState, RootState } from '../../@types/types';
+import { CartItemType, CartSliceState, RootState } from '../../@types/types';
 
 type CartPathType = {
    id: string
@@ -17,48 +18,26 @@ const cartSlice = createSlice({
    name: 'cart',
    initialState,
    reducers: {
-      addItem(state, action: PayloadAction<CartPathType>) {
-         const findItem = state.items.find((obj) => {
-            return (
-               (obj.id === action.payload.id) &&
-               (obj.size === action.payload.size) &&
-               (obj.type === action.payload.type))
-         });
-         findItem ? findItem.count && findItem.count++ : state.items.push({
-            ...action.payload, count: 1
-         });
-         state.totalPrice = state.items.reduce((sum, obj) => {
-            if (obj.count) {
-               return obj.price * obj.count + sum
-            }
-         }, 0)
-         // const findItem = state.items.find((obj) => obj.id === action.payload.id)
-         // if (findItem?.count) {
-         //    findItem.count++;
-         // } else {
-         //    state.items.push({
-         //       ...action.payload,
-         //       count: 1,
-         //    })
-         // }
+      addItem(state, action: PayloadAction<CartItemType>) {
+         const findItem = state.items.find((obj) => obj.id === action.payload.id)
+         if (findItem?.count) {
+            findItem.count++;
+         } else {
+            state.items.push({
+               ...action.payload,
+               count: 1,
+            })
+         }
+         state.totalPrice = calcTotalPrice(state.items)
       },
       minusItem(state, action: PayloadAction<string>) {
          const findItem = state.items.find(obj => obj.id === action.payload);
-         if (findItem?.count) findItem.count--;
+         if (findItem) findItem.count--;
+         state.totalPrice = calcTotalPrice(state.items)
       },
       removeItem(state, action: PayloadAction<string>) {
-         // state.items = state.items.filter((obj) => obj.id !== action.payload)
-         const findItem = state.items.find(obj => {
-            return ((obj.id === action.payload.id) &&
-               (obj.size === action.payload.size) &&
-               (obj.type === action.payload.type))
-         });
-         state.totalPrice -= findItem.price * findItem.count;
-         state.items = state.items.filter(obj => {
-            return ((obj.id !== action.payload.id) ||
-               (obj.size !== action.payload.size) ||
-               (obj.type !== action.payload.type))
-         });
+         state.items = state.items.filter((obj) => obj.id !== action.payload)
+         state.totalPrice = calcTotalPrice(state.items)
       },
       cleareItems(state) {
          state.items = [];

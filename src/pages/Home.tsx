@@ -7,11 +7,11 @@ import Pagination from '../components/Content/Pagination/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId, setPage, selectFilter } from '../redux/slices/filterSlice';
 import { fetchProducts, selectItemsData } from '../redux/slices/productSlice';
-import { ProductBlockPropsType } from '../@types/types';
+import { ProductBlockPropsType, useAppDispatch } from '../@types/types';
 import Categories from '../components/Content/Categories/Categories';
 
 const Home: React.FC = React.memo(() => {
-   const dispatch = useDispatch();
+   const dispatch = useAppDispatch();
 
    // const isSearch = useRef(false); // ?? это для useEffect, которые отвечают за превязку URL
    // const isMounted = useRef(false); // ** это для useEffect, которые отвечают за превязку URL
@@ -33,8 +33,12 @@ const Home: React.FC = React.memo(() => {
       const sortBy = sort.sortProperty.replace('-', '');
       const categorySelection = categoryId > 0 ? `category=${categoryId}` : '';
       const search = searchValue ? `&search=${searchValue}` : '';
-      // @ts-ignore
-      dispatch(fetchProducts({ order, sortBy, categorySelection, search, pageCount }))
+
+      // dispatch(fetchProducts({ order, sortBy, categorySelection, search, pageCount }))
+      dispatch({
+         type: 'sdsdsd',
+         action: 'sdsdsd'
+      })
    }
 
    // ** Если изменили параметры и был первый рендер - требует доработки

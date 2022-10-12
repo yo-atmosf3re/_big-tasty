@@ -1,30 +1,26 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { CartItemPropsType } from '../../../@types/types';
-import { addItem, minusItem, removeItem } from '../../../redux/slices/cartSlice';
+import { addItem, cleareItems, minusItem, removeItem } from '../../../redux/slices/cartSlice';
 
 const CartItem: React.FC<CartItemPropsType> = ({ id, title, type, price, count, imageUrl, size }) => {
    const dispatch = useDispatch();
    const onClickInc = () => {
-      dispatch(addItem({
-         id, type, size,
-      }))
+      // dispatch(addItem({
+      //    id, type, size,
+      // }))
+      dispatch(addItem({ id, imageUrl, price, size, title, type, count }))
    }
    const onClickDec = () => {
-      dispatch(minusItem({
-         id, type, size,
-      }))
-      if (count <= 0) {
-         dispatch(removeItem({
-            id, type, size,
-         }))
-      }
+      count > 0 ? dispatch(minusItem(id)) : dispatch(cleareItems())
+
    }
    const onClickRemove = () => {
       if (window.confirm('Вы действительно хотите удалить товар?')) {
-         dispatch(removeItem({
-            id, type, size,
-         }))
+         // dispatch(removeItem({
+         // id, type, size,
+         // }))
+         dispatch(removeItem(id))
       }
    }
    return (
