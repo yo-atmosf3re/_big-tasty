@@ -6,8 +6,8 @@ import PizzaBlock from '../components/Content/PizzaBlock/PizzaBlock';
 import Skeleton from '../components/Content/PizzaBlock/Skeleton';
 import Pagination from '../components/Content/Pagination/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setPage, setFilters, selectFilter } from '../redux/slices/filterSlice';
-import { useNavigate, Link } from 'react-router-dom';
+import { setCategoryId, setPage, selectFilter } from '../redux/slices/filterSlice';
+import { useNavigate } from 'react-router-dom';
 import { sortTitle } from '../components/Content/Sort/Sort'
 import { fetchPizzas, selectItemsData } from '../redux/slices/pizzaSlice';
 
@@ -89,11 +89,7 @@ const Home = React.memo(() => {
 
 
 
-   const pizzas = items.map((obj) => (
-      <Link key={obj.id} to={`/product/${obj.id}`}>
-         <PizzaBlock  {...obj} />
-      </Link>
-   ));
+   const pizzas = items.map((obj) => (<PizzaBlock key={obj.id}  {...obj} />));
    const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
 
    return (<div className='content'>
