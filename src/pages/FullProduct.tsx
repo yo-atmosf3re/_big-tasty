@@ -1,17 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { ProductType } from '../@types/types';
 
-type ProductType = {
-   id: string,
-   imageUrl: string,
-   title?: string,
-   types?: Array<number>
-   sizes?: Array<number>,
-   price: number,
-   category?: number,
-   rating?: number
-}
+
 
 const FullProduct: React.FC = () => {
    const [product, setProduct] = useState<undefined | ProductType>();

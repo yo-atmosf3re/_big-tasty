@@ -5,7 +5,7 @@ import './scss/app.scss'
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import FullProduct from './pages/FullProduct';
-import Cart from './pages/Cart/Cart.jsx';
+import Cart from './pages/Cart/Cart';
 import MainLayout from './pages/MainLayout';
 
 const App = React.memo(() => {

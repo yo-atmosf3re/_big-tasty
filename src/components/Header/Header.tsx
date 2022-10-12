@@ -1,13 +1,13 @@
 import React from 'react'
-import PastaLogo from '../../assets/img/pasta-logo.svg'
 import { Link, useLocation } from 'react-router-dom'
 import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../../redux/slices/cartSlice';
+import PastaLogo from '../../assets/img/pasta-logo.svg'
 
 const Header = React.memo(() => {
    const { items, totalPrice } = useSelector(selectCart);
-   const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+   const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
    // ** useLocation - если он регаирует на изменение роутера, то заставляет перерисоваться компоненту.
    const location = useLocation();
 

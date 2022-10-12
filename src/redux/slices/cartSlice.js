@@ -43,7 +43,7 @@ const cartSlice = createSlice({
                (obj.type !== action.payload.type))
          });
       },
-      cleareItems(state, action) {
+      cleareItems(state) {
          state.items = [];
          state.totalPrice = 0;
       },

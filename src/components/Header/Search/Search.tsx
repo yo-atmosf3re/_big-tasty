@@ -1,14 +1,14 @@
-import React, { useCallback, useContext, useRef, useState } from 'react';
+import React, { ChangeEvent, useCallback, useContext, useRef, useState } from 'react';
 import styles from './Search.module.scss'
 import debounce from 'lodash.debounce';
 import { useDispatch } from 'react-redux'
 import { setSearchValue } from '../../../redux/slices/filterSlice'
 
-const Search = React.memo(() => {
+const Search: React.FC = React.memo(() => {
    const dispatch = useDispatch();
    const [value, setValue] = useState('');
 
-   const onChangeInput = (e) => {
+   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
       setValue(e.currentTarget.value)
       updateSearchValue(e.currentTarget.value)
    }
@@ -21,10 +21,10 @@ const Search = React.memo(() => {
    const clearSearchInputHandler = () => {
       dispatch(setSearchValue(''))
       setValue('')
-      inputRef.current.focus()
+      inputRef.current?.focus()
    }
 
-   const inputRef = useRef();
+   const inputRef = useRef<HTMLInputElement>(null);
    return (
       <div className={styles.root}>
          <svg className={styles.icon} viewBox="0 0 32 32" >

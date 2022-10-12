@@ -2,20 +2,22 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, selectCartItemById } from '../../../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
+import { NamesType, ProductBlockPropsType } from '../../../@types/types';
 
-const typeNames = ["тонкое", "традиционное"]
+const typeNames: NamesType[] = ["тонкое", "традиционное"]
 
-const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
+
+const ProductBlock: React.FC<ProductBlockPropsType> = ({ id, title, price, imageUrl, sizes, types }) => {
    const dispatch = useDispatch();
    const cartItem = useSelector(selectCartItemById(id))
 
-   const [pizzaCount, setPizzaCount] = useState(0)
-   const [typeIndex, setTypeIndex] = useState(0);
-   const [sizeIndex, setSizeIndex] = useState(0);
+   const [productCount, setProductCount] = useState<number>(0)
+   const [typeIndex, setTypeIndex] = useState<number>(0);
+   const [sizeIndex, setSizeIndex] = useState<number>(0);
 
    const addedCount = cartItem ? cartItem.count : 0;
 
-   const pizzaCountClickHandler = () => setPizzaCount(pizzaCount + 1)
+   const productCountClickHandler = () => setProductCount(productCount + 1)
    const onClickAddProduct = () => {
       const item = {
          id, title, price, imageUrl,
@@ -46,7 +48,7 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
                }
             </ul>
          </div>
-         <div className="pizza-block__bottom" onClick={pizzaCountClickHandler}>
+         <div className="pizza-block__bottom" onClick={productCountClickHandler}>
             <div className="pizza-block__price">от {price} ₽</div>
             <div onClick={onClickAddProduct} className="button button--outline button--add">
                <svg
@@ -69,4 +71,4 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
    </div>);
 }
 
-export default PizzaBlock;
+export default ProductBlock;

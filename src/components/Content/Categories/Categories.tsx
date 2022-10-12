@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { CategoriesPropsType, CategoryType } from '../../../@types/types';
 
-const Categories = ({ value, onClickCategory }) => {
+const Categories: React.FC<CategoriesPropsType> = ({ value, onClickCategory }) => {
 
-   const categories = ['Все', 'Мясные', "Вегетарианские", "Гриль", "Острые", "Закрытые"];
+   const categories: CategoryType[] = ["Все", "Мясные", "Вегетарианские", "Гриль", "Острые", "Закрытые"];
 
    return (<div className="categories">
       {

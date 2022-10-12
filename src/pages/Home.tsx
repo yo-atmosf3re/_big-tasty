@@ -1,18 +1,16 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import qs from 'qs'
-import Categories from '../components/Content/Categories/Categories';
 import Sort from '../components/Content/Sort/Sort';
-import PizzaBlock from '../components/Content/PizzaBlock/PizzaBlock';
+import ProductBlock from '../components/Content/PizzaBlock/ProductBlock';
 import Skeleton from '../components/Content/PizzaBlock/Skeleton';
 import Pagination from '../components/Content/Pagination/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId, setPage, selectFilter } from '../redux/slices/filterSlice';
-import { useNavigate } from 'react-router-dom';
-import { sortTitle } from '../components/Content/Sort/Sort'
 import { fetchPizzas, selectItemsData } from '../redux/slices/pizzaSlice';
+import { ProductBlockPropsType } from '../@types/types';
+import Categories from '../components/Content/Categories/Categories';
 
-const Home = React.memo(() => {
-   const navigate = useNavigate();
+const Home: React.FC = React.memo(() => {
    const dispatch = useDispatch();
 
    // const isSearch = useRef(false); // ?? это для useEffect, которые отвечают за превязку URL
@@ -23,11 +21,11 @@ const Home = React.memo(() => {
 
 
 
-   const changeCategoryHandler = useCallback((i) => {
-      dispatch(setCategoryId(i))
+   const changeCategoryHandler = useCallback((id: number) => {
+      dispatch(setCategoryId(id))
    }, [setCategoryId])
-   const setCurrentPage = useCallback((v) => {
-      dispatch(setPage(v))
+   const setCurrentPage = useCallback((value: number) => {
+      dispatch(setPage(value))
    }, [setPage])
 
    const getPizzas = async () => {
@@ -35,6 +33,7 @@ const Home = React.memo(() => {
       const sortBy = sort.sortProperty.replace('-', '');
       const categorySelection = categoryId > 0 ? `category=${categoryId}` : '';
       const search = searchValue ? `&search=${searchValue}` : '';
+      // @ts-ignore
       dispatch(fetchPizzas({ order, sortBy, categorySelection, search, pageCount }))
    }
 
@@ -89,7 +88,7 @@ const Home = React.memo(() => {
 
 
 
-   const pizzas = items.map((obj) => (<PizzaBlock key={obj.id}  {...obj} />));
+   const pizzas = items.map((obj: ProductBlockPropsType) => (<ProductBlock key={obj.id}  {...obj} />));
    const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
 
    return (<div className='content'>
