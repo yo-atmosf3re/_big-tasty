@@ -23,9 +23,11 @@ const Sort: React.FC = () => {
       setActivePopup(!activePopup)
    }
 
+
+
    useEffect(() => {
-      const handleClickOutside = (event: any) => {
-         let path = event.composedPath().includes(sortRef.current);
+      const handleClickOutside = (event: MouseEvent) => {
+         let path = sortRef.current && event.composedPath().includes(sortRef.current);
          if (!path) setActivePopup(false);
       };
       document.body.addEventListener('click', handleClickOutside);

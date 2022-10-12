@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, selectCartItemById } from '../../../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
-import { NamesType, ProductBlockPropsType } from '../../../@types/types';
+import { CartItem, NamesType, ProductBlockPropsType } from '../../../@types/types';
 
 const typeNames: NamesType[] = ["тонкое", "традиционное"]
 
@@ -19,7 +19,7 @@ const ProductBlock: React.FC<ProductBlockPropsType> = ({ id, title, price, image
 
    const productCountClickHandler = () => setProductCount(productCount + 1)
    const onClickAddProduct = () => {
-      const item = {
+      const item: CartItem = {
          id, title, price, imageUrl,
          type: typeNames[typeIndex],
          size: sizes[sizeIndex],
@@ -64,7 +64,7 @@ const ProductBlock: React.FC<ProductBlockPropsType> = ({ id, title, price, image
                   />
                </svg>
                <span>Добавить</span>
-               {addedCount > 0 && <i>{addedCount}</i>}
+               {addedCount && addedCount > 0 && <i>{addedCount}</i>}
             </div>
          </div>
       </div>

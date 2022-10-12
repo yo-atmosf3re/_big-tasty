@@ -1,12 +1,12 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import qs from 'qs'
 import Sort from '../components/Content/Sort/Sort';
-import ProductBlock from '../components/Content/PizzaBlock/ProductBlock';
-import Skeleton from '../components/Content/PizzaBlock/Skeleton';
+import ProductBlock from '../components/Content/ProductBlock/ProductBlock';
+import Skeleton from '../components/Content/ProductBlock/Skeleton';
 import Pagination from '../components/Content/Pagination/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId, setPage, selectFilter } from '../redux/slices/filterSlice';
-import { fetchPizzas, selectItemsData } from '../redux/slices/pizzaSlice';
+import { fetchProducts, selectItemsData } from '../redux/slices/productSlice';
 import { ProductBlockPropsType } from '../@types/types';
 import Categories from '../components/Content/Categories/Categories';
 
@@ -34,7 +34,7 @@ const Home: React.FC = React.memo(() => {
       const categorySelection = categoryId > 0 ? `category=${categoryId}` : '';
       const search = searchValue ? `&search=${searchValue}` : '';
       // @ts-ignore
-      dispatch(fetchPizzas({ order, sortBy, categorySelection, search, pageCount }))
+      dispatch(fetchProducts({ order, sortBy, categorySelection, search, pageCount }))
    }
 
    // ** Если изменили параметры и был первый рендер - требует доработки
