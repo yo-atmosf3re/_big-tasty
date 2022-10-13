@@ -3,7 +3,7 @@ import { CategoriesPropsType, CategoryType } from '../../../@types/types';
 
 const categories: CategoryType[] = ["Все", "Мясные", "Вегетарианские", "Гриль", "Острые", "Закрытые"];
 
-const Categories: React.FC<CategoriesPropsType> = memo(({ value, onClickCategory }) => {
+export const Categories: React.FC<CategoriesPropsType> = memo(({ value, onClickCategory }) => {
 
    return (<div className="categories">
       {
@@ -15,5 +15,3 @@ const Categories: React.FC<CategoriesPropsType> = memo(({ value, onClickCategory
       }
    </div >);
 })
-
-export default Categories;

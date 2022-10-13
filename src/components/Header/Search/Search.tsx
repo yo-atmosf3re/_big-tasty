@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import { useDispatch } from 'react-redux'
 import { setSearchValue } from '../../../redux/slices/filterSlice'
 
-const Search: React.FC = React.memo(() => {
+export const Search: React.FC = React.memo(() => {
    const dispatch = useDispatch();
    const [value, setValue] = useState('');
 
@@ -50,5 +50,3 @@ const Search: React.FC = React.memo(() => {
       </div>
    );
 })
-
-export default Search;

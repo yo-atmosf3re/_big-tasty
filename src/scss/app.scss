@@ -119,6 +119,7 @@ body {
 }
 
 .cart {
+  min-height: 565px;
   &__top {
     display: flex;
     justify-content: space-between;
@@ -359,10 +360,11 @@ body {
   }
 
   &--empty {
-    margin: 10px auto;
-    padding: 60px;
+    margin: 0 auto;
+    padding-top: 60px;
     width: 620px;
     text-align: center;
+    min-height: 858px;
 
     h2 {
       font-size: 32px;

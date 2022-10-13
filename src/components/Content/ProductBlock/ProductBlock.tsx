@@ -8,7 +8,7 @@ import { selectCartItemById } from '../../../redux/slices/selectorsSlices';
 const typeNames: NamesType[] = ["тонкое", "традиционное"]
 
 
-const ProductBlock: React.FC<ProductBlockPropsType> = ({ id, title, price, imageUrl, sizes, types }) => {
+export const ProductBlock: React.FC<ProductBlockPropsType> = ({ id, title, price, imageUrl, sizes, types }) => {
    const dispatch = useDispatch();
    const cartItem = useSelector(selectCartItemById(id))
 
@@ -71,5 +71,3 @@ const ProductBlock: React.FC<ProductBlockPropsType> = ({ id, title, price, image
       </div>
    </div>);
 }
-
-export default ProductBlock;

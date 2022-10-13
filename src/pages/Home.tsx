@@ -1,16 +1,12 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import qs from 'qs'
-import Sort from '../components/Content/Sort/Sort';
-import ProductBlock from '../components/Content/ProductBlock/ProductBlock';
-import Skeleton from '../components/Content/ProductBlock/Skeleton';
-import Pagination from '../components/Content/Pagination/Pagination';
 import { useSelector } from 'react-redux';
 import { setCategoryId, setPage } from '../redux/slices/filterSlice';
 import { ProductBlockPropsType, useAppDispatch } from '../@types/types';
-import Categories from '../components/Content/Categories/Categories';
 import { useNavigate } from 'react-router-dom';
 import { selectFilter, selectItemsData } from '../redux/slices/selectorsSlices';
 import { fetchProducts } from '../redux/slices/asyncActions';
+import { ProductBlock, Skeleton, Categories, Sort, Pagination } from '../components';
 
 const Home: React.FC = React.memo(() => {
    const dispatch = useAppDispatch();
@@ -66,7 +62,7 @@ const Home: React.FC = React.memo(() => {
    // }, [])
 
    const pizzas = items.map((obj: ProductBlockPropsType) => (<ProductBlock key={obj.id}  {...obj} />));
-   const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
+   const skeletons = [...new Array(4)].map((_, i) => <Skeleton key={i} />);
 
    return (<div className='content'>
       <div className='container'>

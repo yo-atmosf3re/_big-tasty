@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import PastaLogo from '../../assets/img/pasta-logo.svg'
 import { selectCart } from '../../redux/slices/selectorsSlices';
+import { Search } from '..';
 
-const Header = React.memo(() => {
+export const Header = React.memo(() => {
    const { items, totalPrice } = useSelector(selectCart);
    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
    // ** useLocation - если он регаирует на изменение роутера, то заставляет перерисоваться компоненту.
@@ -74,5 +74,3 @@ const Header = React.memo(() => {
          </div>
       </div >);
 })
-
-export default Header;

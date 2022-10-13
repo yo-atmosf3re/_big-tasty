@@ -12,7 +12,7 @@ export const sortTitle: Array<SortTitleType> = [
    { name: 'алфавиту (↑)', sortProperty: SortPropertyEnum.TITLE_ASC },
 ]
 
-const Sort: React.FC<SortPropsType> = React.memo(({ sort }) => {
+export const Sort: React.FC<SortPropsType> = React.memo(({ sort }) => {
    const dispatch = useDispatch();
    const sortRef = useRef<HTMLDivElement>(null);
    const [activePopup, setActivePopup] = useState<boolean>(false)
@@ -67,5 +67,3 @@ const Sort: React.FC<SortPropsType> = React.memo(({ sort }) => {
          }
       </div>);
 })
-
-export default Sort;
