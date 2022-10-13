@@ -2,16 +2,9 @@ import { ItemProductType, Status } from './../../@types/types';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { FetchProductsArgumentsType, ProductSliceState, RootState } from '../../@types/types';
+import { fetchProducts } from './asyncActions';
 
 // ** ThunkAPI - дополнительная утилита к createAsyncThunk, передается в параметры createAsyncThunk. Является объектом, в котором есть функции: dispatch - это нужно, чтобы задиспачить, что-то из другого редьюсера(слайса), например, getState - нужно для того, чтобы вытащить какие-то данные из стэйта до его изменения, extra - для того, чтобы работать с middleware, requestId - нужно для того, чтобы в каком-то случае прервать загрузку запроса или сделать так, чтобы запрос выполнился не доконца (например загрузку файла), и это всё используется вместе с signal, signal - нужен для для того, чтобы сделать, что-то с запросом, например оборвать его (используется вместе AbortController.signal), rejectWithValue(value, meta) и fulfillWithValue(value, meta) - нужно для того, чтобы расширить логику и запросы, если запрос выполнен успешно или нет.
-
-// ** Здесь мы создаем асинхронный экшен, внутри которого делаем запрос, и когда он выполнится возвращаем ответ (data). Этот асинхронный экшен можно использовать внутри обычных слайсов или редьюсеров.
-// ?? Про типизацию: В дженериках, после createAsyncThunk, указываем первым параметром то, что вернёт асинхронный экшен (return data, типизация для data), а во второй аргумент указываем конкретную типизацию тех аргументов, с которыми будем работаь в самом асинхроном экшене (типизация для params). Далее, если нужно типизировать извелекаемое data, которое возвращает нам axios, то в дженериках к get-запросу указываем типизацию для { data }, чтобы axios понимал, что нужно получить.
-export const fetchProducts = createAsyncThunk<ItemProductType[], FetchProductsArgumentsType>('product/fetchProductsStatus', async (params) => {
-   const { order, sortBy, categorySelection, search, pageCount } = params;
-   const { data } = await axios.get<ItemProductType[]>(`https://633fd93ae44b83bc73c298e6.mockapi.io/items?page=${pageCount}&limit=4&${categorySelection}&sortBy=${sortBy}&order=${order}${search}`);
-   return data;
-})
 
 const initialState: ProductSliceState = {
    items: [],
@@ -44,9 +37,6 @@ const productSlice = createSlice({
       })
    }
 })
-
-// ?? Про типизацию: здесь мы просто типизируем ту часть стэйта, которую должны получить, потому что это селектор, поэтому в аргументе указываем типизацию всего стейта, а вот уже функция вернёт нужную нам часть стейта. RootState берётся из store.ts. 
-export const selectItemsData = (state: RootState) => state.product;
 
 export const { setItem } = productSlice.actions;
 

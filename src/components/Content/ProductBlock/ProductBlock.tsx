@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, selectCartItemById } from '../../../redux/slices/cartSlice';
+import { addItem } from '../../../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
 import { CartItemType, NamesType, ProductBlockPropsType } from '../../../@types/types';
+import { selectCartItemById } from '../../../redux/slices/selectorsSlices';
 
 const typeNames: NamesType[] = ["тонкое", "традиционное"]
 
@@ -64,7 +65,7 @@ const ProductBlock: React.FC<ProductBlockPropsType> = ({ id, title, price, image
                   />
                </svg>
                <span>Добавить </span>
-               {addedCount && addedCount > 0 && <i>{addedCount}</i>}
+               {addedCount > 0 && <i>{addedCount}</i>}
             </div>
          </div>
       </div>

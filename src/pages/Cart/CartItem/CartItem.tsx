@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { CartItemPropsType, CartItemType } from '../../../@types/types';
-import { addItem, cleareItems, minusItem, removeItem } from '../../../redux/slices/cartSlice';
+import { addItem, minusItem, removeItem } from '../../../redux/slices/cartSlice';
 
 const CartItem: React.FC<CartItemPropsType> = ({ id, title, type, price, count, imageUrl, size }) => {
    const dispatch = useDispatch();
@@ -10,7 +10,6 @@ const CartItem: React.FC<CartItemPropsType> = ({ id, title, type, price, count, 
       dispatch(addItem({ id } as CartItemType))
    }
    const onClickDec = () => {
-      // count > 1 ? dispatch(minusItem(id)) : dispatch(cleareItems())
       dispatch(minusItem(id))
 
    }

@@ -1,3 +1,4 @@
+import { getCarFromLS } from './../../utils/getCartFromLS';
 import { calcTotalPrice } from './../../utils/calcTotalPrice';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CartItemType, CartSliceState, RootState } from '../../@types/types';
@@ -8,10 +9,10 @@ type CartPathType = {
    type: string
 }
 
+const { totalPrice, items } = getCarFromLS();
 
 const initialState: CartSliceState = {
-   totalPrice: 0,
-   items: []
+   totalPrice, items,
 }
 
 const cartSlice = createSlice({
@@ -45,10 +46,6 @@ const cartSlice = createSlice({
       },
    }
 })
-
-// ** Редакс-селектор - обычная функция, которая, так же как и анонимная функция в useSelector'e, вытаскивает данные из стейта и передает их в useSelector, и далее экспортируется в нужный селектор;
-export const selectCart = (state: RootState) => state.cart;
-export const selectCartItemById = (id: string) => (state: RootState) => state.cart.items.find(obj => obj.id === id)
 
 export const { addItem, removeItem, cleareItems, minusItem } = cartSlice.actions;
 

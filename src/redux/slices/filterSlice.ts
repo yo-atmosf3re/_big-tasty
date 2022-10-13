@@ -43,9 +43,6 @@ export const filterSlice = createSlice({
    },
 })
 
-export const selectSort = (state: RootState) => state.filter.sort;
-export const selectFilter = (state: RootState) => state.filter;
-
 // ** Это для того, чтобы из слайса достать методы и экспортировать их. Все методы хранятся в actions. То есть, тут мы достаем методы из слайса, присваеваем их константе и экспортируем
 export const { setCategoryId, setSort, setPage, setFilters, setSearchValue } = filterSlice.actions;
 

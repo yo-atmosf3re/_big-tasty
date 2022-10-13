@@ -1,15 +1,16 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import qs from 'qs'
-import Sort, { sortTitle } from '../components/Content/Sort/Sort';
+import Sort from '../components/Content/Sort/Sort';
 import ProductBlock from '../components/Content/ProductBlock/ProductBlock';
 import Skeleton from '../components/Content/ProductBlock/Skeleton';
 import Pagination from '../components/Content/Pagination/Pagination';
 import { useSelector } from 'react-redux';
-import { setCategoryId, setPage, selectFilter, setFilters } from '../redux/slices/filterSlice';
-import { fetchProducts, selectItemsData } from '../redux/slices/productSlice';
-import { FetchProductsArgumentsType, ProductBlockPropsType, useAppDispatch } from '../@types/types';
+import { setCategoryId, setPage } from '../redux/slices/filterSlice';
+import { ProductBlockPropsType, useAppDispatch } from '../@types/types';
 import Categories from '../components/Content/Categories/Categories';
 import { useNavigate } from 'react-router-dom';
+import { selectFilter, selectItemsData } from '../redux/slices/selectorsSlices';
+import { fetchProducts } from '../redux/slices/asyncActions';
 
 const Home: React.FC = React.memo(() => {
    const dispatch = useAppDispatch();
