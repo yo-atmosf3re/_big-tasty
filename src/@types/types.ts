@@ -3,6 +3,9 @@ import { store } from "../redux/store";
 
 // ?? Typing for components
 // ?? Sort.tsx
+export type SortPropsType = {
+   sort: SortType
+}
 export type SortTitleType = {
    name: 'популярности (↓)' | 'популярности (↑)' | 'цене (↓)' | 'цене (↑)' | 'алфавиту (↓)' | 'алфавиту (↑)'
    sortProperty: SortPropertyEnum

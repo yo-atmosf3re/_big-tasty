@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { SortPropertyEnum, SortTitleType } from '../../../@types/types';
-import { selectSort, setSort } from '../../../redux/slices/filterSlice';
+import { useDispatch } from 'react-redux'
+import { SortPropertyEnum, SortPropsType, SortTitleType, } from '../../../@types/types';
+import { setSort } from '../../../redux/slices/filterSlice';
 
 export const sortTitle: Array<SortTitleType> = [
    { name: 'популярности (↓)', sortProperty: SortPropertyEnum.RATING_DESC },
@@ -12,10 +12,9 @@ export const sortTitle: Array<SortTitleType> = [
    { name: 'алфавиту (↑)', sortProperty: SortPropertyEnum.TITLE_ASC },
 ]
 
-const Sort: React.FC = () => {
+const Sort: React.FC<SortPropsType> = React.memo(({ sort }) => {
    const dispatch = useDispatch();
    const sortRef = useRef<HTMLDivElement>(null);
-   const sort = useSelector(selectSort);
    const [activePopup, setActivePopup] = useState<boolean>(false)
 
    const onClickPopupActive = (i: SortTitleType) => {
@@ -67,6 +66,6 @@ const Sort: React.FC = () => {
             </div>)
          }
       </div>);
-}
+})
 
 export default Sort;

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { CategoriesPropsType, CategoryType } from '../../../@types/types';
 
-const Categories: React.FC<CategoriesPropsType> = ({ value, onClickCategory }) => {
+const categories: CategoryType[] = ["Все", "Мясные", "Вегетарианские", "Гриль", "Острые", "Закрытые"];
 
-   const categories: CategoryType[] = ["Все", "Мясные", "Вегетарианские", "Гриль", "Острые", "Закрытые"];
+const Categories: React.FC<CategoriesPropsType> = memo(({ value, onClickCategory }) => {
 
    return (<div className="categories">
       {
@@ -14,6 +14,6 @@ const Categories: React.FC<CategoriesPropsType> = ({ value, onClickCategory }) =
          </ul>
       }
    </div >);
-}
+})
 
 export default Categories;

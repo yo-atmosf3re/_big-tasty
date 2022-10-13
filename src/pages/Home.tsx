@@ -22,7 +22,7 @@ const Home: React.FC = React.memo(() => {
 
    const changeCategoryHandler = useCallback((id: number) => {
       dispatch(setCategoryId(id))
-   }, [setCategoryId])
+   }, [])
    const setCurrentPage = useCallback((value: number) => {
       dispatch(setPage(value))
    }, [setPage])
@@ -71,7 +71,7 @@ const Home: React.FC = React.memo(() => {
       <div className='container'>
          <div className="content__top">
             <Categories value={categoryId} onClickCategory={changeCategoryHandler} />
-            <Sort />
+            <Sort sort={sort} />
          </div>
          <div>
             <h2 className="content__title">Все пиццы</h2>

@@ -63,7 +63,7 @@ const ProductBlock: React.FC<ProductBlockPropsType> = ({ id, title, price, image
                      fill="white"
                   />
                </svg>
-               <span>Добавить</span>
+               <span>Добавить </span>
                {addedCount && addedCount > 0 && <i>{addedCount}</i>}
             </div>
          </div>
