@@ -13,7 +13,6 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <App />
-      /// 14:41
     </BrowserRouter>
   </Provider>
 );

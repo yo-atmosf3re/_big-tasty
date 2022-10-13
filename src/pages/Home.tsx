@@ -1,25 +1,24 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import qs from 'qs'
-import Sort from '../components/Content/Sort/Sort';
+import Sort, { sortTitle } from '../components/Content/Sort/Sort';
 import ProductBlock from '../components/Content/ProductBlock/ProductBlock';
 import Skeleton from '../components/Content/ProductBlock/Skeleton';
 import Pagination from '../components/Content/Pagination/Pagination';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setPage, selectFilter } from '../redux/slices/filterSlice';
+import { useSelector } from 'react-redux';
+import { setCategoryId, setPage, selectFilter, setFilters } from '../redux/slices/filterSlice';
 import { fetchProducts, selectItemsData } from '../redux/slices/productSlice';
-import { ProductBlockPropsType, useAppDispatch } from '../@types/types';
+import { FetchProductsArgumentsType, ProductBlockPropsType, useAppDispatch } from '../@types/types';
 import Categories from '../components/Content/Categories/Categories';
+import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = React.memo(() => {
    const dispatch = useAppDispatch();
 
-   // const isSearch = useRef(false); // ?? это для useEffect, которые отвечают за превязку URL
-   // const isMounted = useRef(false); // ** это для useEffect, которые отвечают за превязку URL
+   const isMounted = useRef(false);
+   const navigate = useNavigate();
 
    const { categoryId, sort, pageCount, searchValue } = useSelector(selectFilter)
    const { items, status } = useSelector(selectItemsData)
-
-
 
    const changeCategoryHandler = useCallback((id: number) => {
       dispatch(setCategoryId(id))
@@ -33,27 +32,9 @@ const Home: React.FC = React.memo(() => {
       const sortBy = sort.sortProperty.replace('-', '');
       const categorySelection = categoryId > 0 ? `category=${categoryId}` : '';
       const search = searchValue ? `&search=${searchValue}` : '';
-
-      // dispatch(fetchProducts({ order, sortBy, categorySelection, search, pageCount }))
-      dispatch({
-         type: 'sdsdsd',
-         action: 'sdsdsd'
-      })
+      dispatch(fetchProducts({ order, sortBy, categorySelection, search, pageCount }))
    }
 
-   // ** Если изменили параметры и был первый рендер - требует доработки
-   // useEffect(() => {
-   //    if (isMounted.current) {
-   //       const queryString = qs.stringify({
-   //          sortProperty: sort.sortProperty,
-   //          categoryId,
-   //          pageCount,
-   //       })
-   //       navigate(`?${queryString}`)
-   //    }
-   //    isMounted.current = true;
-   // }, [categoryId, sort.sortProperty, pageCount])
-   // ** Либо верхний useEffect, либо нижний
    // useEffect(() => {
    //    if (isMounted.current) {
    //       const params = {
@@ -64,33 +45,24 @@ const Home: React.FC = React.memo(() => {
    //       const queryString = qs.stringify(params, { skipNulls: true })
    //       navigate(`/?${queryString}`)
    //    }
-   //    if (!window.location.search) {
-   //       fetchPizzas();
-   //    }
-   // })
-
-   // ** Если был первый рендер, то проверяем URL-параметры и сохраняем в redux - требует доработки
-   // useEffect(() => {
-   //    debugger
-   //    if (window.location.search) {
-   //       const params = qs.parse(window.location.search.substring(1));
-   //       const sort = sortTitle.find((o) => o.sortProperty === params.sortProperty)
-   //       dispatch(setFilters({
-   //          ...params,
-   //          sort,
-   //       })
-   //       );
-   //       isSearch.current = true;
-   //    }
-   // }, [])
-
-   // ** Если был первый рендер, то запрашиваем пиццы - требует доработки
-
+   //    if (!window.location.search) dispatch(fetchProducts({} as FetchProductsArgumentsType))
+   // }, [categoryId, sort.sortProperty, searchValue, pageCount])
    useEffect(() => {
       getPizzas();
    }, [categoryId, sort.sortProperty, searchValue, pageCount])
-
-
+   // useEffect(() => {
+   //    if (window.location.search) {
+   //       const params = qs.parse(window.location.search.substring(1)) as unknown as FetchProductsArgumentsType;
+   //       const sort = sortTitle.find((obj) => obj.sortProperty === params.sortBy);
+   //       dispatch(setFilters({
+   //          searchValue: params.search,
+   //          categoryId: Number(params.categorySelection),
+   //          pageCount: params.pageCount,
+   //          sort: sort || sortTitle[0],
+   //       }))
+   //    }
+   //    isMounted.current = true;
+   // }, [])
 
    const pizzas = items.map((obj: ProductBlockPropsType) => (<ProductBlock key={obj.id}  {...obj} />));
    const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);

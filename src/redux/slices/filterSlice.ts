@@ -1,4 +1,4 @@
-import { FilterSliceState, RootState, SortTitleType } from './../../@types/types';
+import { FilterSliceState, RootState, SortTitleType, SortPropertyEnum } from './../../@types/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 // todo Начальный стейт, как по классике редакса;
@@ -7,7 +7,7 @@ const initialState: FilterSliceState = {
    categoryId: 0,
    pageCount: 1,
    sort: {
-      name: 'популярности (↓)', sortProperty: 'rating'
+      name: 'популярности (↓)', sortProperty: SortPropertyEnum.RATING_DESC
    }
 }
 
@@ -36,7 +36,7 @@ export const filterSlice = createSlice({
             state.categoryId = 0;
             state.sort = {
                name: 'популярности (↓)',
-               sortProperty: 'rating',
+               sortProperty: SortPropertyEnum.RATING_DESC,
             }
          }
       }

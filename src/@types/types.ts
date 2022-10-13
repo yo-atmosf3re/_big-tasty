@@ -5,7 +5,15 @@ import { store } from "../redux/store";
 // ?? Sort.tsx
 export type SortTitleType = {
    name: 'популярности (↓)' | 'популярности (↑)' | 'цене (↓)' | 'цене (↑)' | 'алфавиту (↓)' | 'алфавиту (↑)'
-   sortProperty: 'rating' | '-rating' | 'price' | '-price' | 'title' | '-title'
+   sortProperty: SortPropertyEnum
+}
+export enum SortPropertyEnum {
+   RATING_DESC = "rating",
+   RATING_ASC = "-rating",
+   TITLE_DESC = "title",
+   TITLE_ASC = "-title",
+   PRICE_DESC = "price",
+   PRICE_ASC = "-price",
 }
 export type PopupClick = React.MouseEvent<HTMLBodyElement> & {
    composedPath: (tar?: HTMLElement) => EventTarget[];
